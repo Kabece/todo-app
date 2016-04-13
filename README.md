@@ -26,15 +26,27 @@ Dzięki temu po dodaniu jakichś todosów będziecie mogli wyświetlić dane i s
 
 db.todos.find().pretty()
 
+## EDIT
+
+Można tez sciągnąć taki programik jak Robomongo i sobie w nim przeglądać :)
+
 No to skoro już wszystko ustawione to wracamy do konsoli, w które dawaliśmy to npm install i wpisujemy:
 
 node server.js
 
 Jeżeli wszystko poszło ok to na localhost:8080 powinniście już mieć najbardziej podstawową wersję apki.
 
+
+## EDIT
+Mozna tez sciagnąć sobie przez npm takie cos jak nodemon - jak sie pliki zmienia to sma restartuje server ;) Taki hot-swap :D
+
+Instalujecie to tak:
+
+npm install -g nodemon
+
 Co wypadałoby zrobić:
 
-- jakąś autentyfikację użytkownika,
+- jakąś autentyfikację użytkownika, ## EDIT - juz w sumie jest, nie idealnie ale jest (mozna jeszcze wejść przez link, ale na stowke da radę to ogarnąć xD),
 - połączyć ten REST który teraz jest używany przez angulara z androidem,
 - osobne bazy dla osobnych użytkowników?
 
