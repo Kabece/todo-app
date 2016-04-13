@@ -1,5 +1,7 @@
 # todo-app
 
+@Protip - polecam używać programu Atom do ogarniania tego projektu - mega fajny jest ;)
+
 Generalnie wygląda to tak:
 
 Ściągacie sobie node.js i mongodb - znajdziecie na necie, to są zwykłe instalatory .msi.
