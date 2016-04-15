@@ -53,3 +53,6 @@ Co wypadałoby zrobić:
 
 
 Generalnie można jeszcze sporo ulepszyć, ale jakiś tam start to jest - jeżeli android by działał to może nie będzie tragedii ;)
+
+
+/* Komentarze w tym stylu - pisałem to ja, Łosek Paweł */
