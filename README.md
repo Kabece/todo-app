@@ -15,6 +15,7 @@ To ściągnie info z pliku package.json i załaduje wszystkie paczki (to jest ta
 Później robicie sobie w tym samym miejscu: mkdir data - to będzie folder na dane z DB
 
 W drugiej konsoli lecicie do folderu gdzie zainstalowaliście MongoDB, katalog /bin i tam odpalacie:
+/* Protip: ustawić sobie zmienną środowiskową i mieć wyjebane w cd czy tam dir xD */
 
 mongod --dbpath <absolutna sciezka wyzej utworzonego folderu data>
 
@@ -48,7 +49,7 @@ Co wypadałoby zrobić:
 
 - jakąś autentyfikację użytkownika, ## EDIT - juz w sumie jest, nie idealnie ale jest (mozna jeszcze wejść przez link, ale na stowke da radę to ogarnąć xD),
 - połączyć ten REST który teraz jest używany przez angulara z androidem, (polecam to: http://socket.io/)
-- osobne bazy dla osobnych użytkowników?
+- osobne bazy dla osobnych użytkowników?  /* Musze się przyjrzeć mongo, ale wydaje mi się że dobrze byłoby przekminić to na jednej bazie - żeby było spójnie */
 
 
 Generalnie można jeszcze sporo ulepszyć, ale jakiś tam start to jest - jeżeli android by działał to może nie będzie tragedii ;)
