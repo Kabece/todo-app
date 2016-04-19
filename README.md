@@ -6,6 +6,16 @@ Generalnie wygląda to tak:
 
 Ściągacie sobie node.js i mongodb - znajdziecie na necie, to są zwykłe instalatory .msi.
 
+/*
+
+  Rozumiem że korzystamy z:
+  - MongoDB 3.2,
+  - node.js 4.4.3
+
+dobrze to uściślić, na jakby co :P
+
+*/
+
 Otwieracie dwa terminale Node.js command prompt, w jednym z nich przechodzicie do folderu, w którym macie aplikację robicie tam:
 
 npm install
