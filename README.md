@@ -16,7 +16,7 @@ dobrze to uściślić, na jakby co :P
 
 */
 
-Otwieracie dwa terminale Node.js command prompt, w jednym z nich przechodzicie do folderu, w którym macie aplikację robicie tam:
+Otwieracie dwa terminale Node.js command prompt /* npm install odpalamy w normalnym shellu */, w jednym z nich przechodzicie do folderu, w którym macie aplikację robicie tam:
 
 npm install
 
