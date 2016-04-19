@@ -9,7 +9,7 @@ Generalnie wygląda to tak:
 /*
 
   Rozumiem że korzystamy z:
-  - MongoDB 3.2,
+  - MongoDB 3.2.5,
   - node.js 4.4.3
 
 dobrze to uściślić, na jakby co :P
