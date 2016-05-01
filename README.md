@@ -29,6 +29,14 @@ W drugiej konsoli lecicie do folderu gdzie zainstalowaliście MongoDB, katalog /
 
 mongod --dbpath <absolutna sciezka wyzej utworzonego folderu data>
 
+/* 
+2016-05-01: wrzucilem konfiguracje bazy danych do repo, odpalamy ją teraz tak: 
+mongod --config $(ścieżka do repo lokalnego)\db\mongo.config
+
+z konsoli wszystko leci do pliku mongo.log, zeby go miec na biezaco mozna otworzyc go tailem - 
+tail -f $(ścieżka do repo lokalnego)\db\log\mongo.log
+*/ 
+
 To odpala bazę danych, powinniście zobaczyć informację, że czeka na połączenia na localhost:27017
 
 Możecie sobie też w tym samym folderze odpalić za pomocą komendy: mongo taki terminal bazodanowy, potem wpiszcie: use nodedb
@@ -36,6 +44,7 @@ Możecie sobie też w tym samym folderze odpalić za pomocą komendy: mongo taki
 Dzięki temu po dodaniu jakichś todosów będziecie mogli wyświetlić dane i sprawdzić że wszystko się zgadza, do tego używacie komendy:
 
 db.todos.find().pretty()
+
 
 ## EDIT
 
