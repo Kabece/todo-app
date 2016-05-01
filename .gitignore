@@ -35,3 +35,7 @@ node_modules
 
 # DATA FROM MONGODB - REMOVE LATER 
 /data
+
+# Logging & database 
+/db/data
+/db/log
