@@ -4,8 +4,17 @@ var bcrypt = require('bcrypt-nodejs');
 var userSchema = mongoose.Schema({
 
   local    : {
+    username: String,
     email  : String,
-    password : String
+    password : String,
+    tasks: [{
+      title: String,
+      description: String,
+      date: {type: Array, "default":[]}, /* na wypadek, jesli ma to byc grupa dni */
+      currentPeriod: Number,  /* aktualna ilosc wykonanego taska */
+      periodQuantity: Number, /* ilosc razy, ile ma byc wykonany task */
+      done: Boolean
+    }]
   }
 });
 
