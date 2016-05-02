@@ -1,4 +1,5 @@
 var Todo = require('./models/todo');
+var User = require('./models/user');
 
 module.exports = function(app, passport) {
 
@@ -45,12 +46,10 @@ app.delete('/api/todos/:todo_id', function(req, res) {
         res.send(err);
       }
 
-      res.json(todos); }); }); });
-
-// front - tego trezba uzyc jezeli nizej (index.ejs) nie zadziala xDD
-//app.get('./public/index.html', function(req, res) {
-//  res.sendfile('./public/index.html');
-//});
+      res.json(todos);
+      });
+    });
+ });
 
 
 // ROUTES FOR AUTHENTIFICATION
@@ -93,9 +92,60 @@ app.get('/logout', function(req, res) {
 
 // new user routes
 
-app.get('/api/activeTasks/:userId', function(req,res) {
-  User.find
+app.get('/api/users', function(req, res) {
+  User.find(function(err, todos) {
+    if (err) {
+      res.send(err);
+    }
+
+    res.json(todos);
+  });
 });
+
+app.get('/api/users/:userMail', function(req,res) {
+  User.find({'email':req.params.userMail}, function(err,user) {
+    if (err) {
+      res.send(err);
+    }
+
+    res.json(user);
+  });
+  });
+
+  app.get('/api/users/tasks/:userMail', function(req,res) {
+    User.find({'email':req.params.userMail},{'tasks':1, '_id':0}, function(err,tasks){
+      if (err) {
+        res.send(err);
+      }
+
+      res.json(tasks);
+    });
+  });
+
+  app.get('/api/users/tasks/active/:userMail', function(req,res) {
+    console.log('Attempting to get active task(s) for user: "' + req.params.userMail + '".');
+    User.find({'email':req.params.userMail},{'tasks': {$elemMatch:{'done':false}}}, function(err,tasks){
+      if (err) {
+        console.log('Something went wrong during getting active task(s) for user "' + req.params.userMail + '": ' + err);
+        res.send(err);
+      }
+
+      console.log('Succesfully got ' + tasks.length + ' active task(s) for user: "' + req.params.userMail + '".');
+      res.json(tasks);
+    });
+  });
+
+  app.get('/api/users/tasks/inactive/:userMail', function(req,res) {
+    console.log('Attempting to get inactive task(s) for user: "' + req.params.userMail + '".');
+    User.find({'email':req.params.userMail},{'tasks': {$elemMatch:{'done':true}}}, function(err,tasks){
+      if (err) {
+        console.log('Something went wrong during getting inactive task(s) for user "' + req.params.userMail + '": ' + err);
+        res.send(err);
+      }
+      console.log('Succesfully got ' + tasks.length + ' inactive task(s) for user: "' + req.params.userMail + '".');
+      res.json(tasks);
+    });
+  });
 
 };
 
