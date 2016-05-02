@@ -24,6 +24,22 @@
 </head>
 
 <body ng-controller="mainController">
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+   <div class="container">
+    <form class="navbar-form pull-right">
+          <p>
+              Welcome, <strong><%= user.local.email%></strong>
+              <button type="submit" class="btn btn-primary">Logout</button>
+          </p>
+    </form>
+   </div>
+  </div>
+ </div>
+
+
+
   <div class="container">
 
     <div class="jumbotron text-center">
