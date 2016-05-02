@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Todo XD</title>
+  <title>TodoApp main page</title>
 
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
   <style>
@@ -27,7 +27,7 @@
   <div class="container">
 
     <div class="jumbotron text-center">
-      <h1>Todooooooooo <span class="label label-info">{{todos.length}}</span></h1>
+      <h1>Todos remaining:  <span class="label label-info">{{todos.length}}</span></h1>
     </div>
 
     <div id="todo-list" class="row">
@@ -46,7 +46,7 @@
         <form>
           <div class="form-group">
 
-            <input type="text" class="form-control input-lg text-center" placeholder="Type here" ng-model="formData.text">
+            <input type="text" class="form-control input-lg text-center" placeholder="Add your todo! " ng-model="formData.text">
           </div>
           <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
         </form>

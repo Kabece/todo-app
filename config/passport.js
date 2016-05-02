@@ -20,13 +20,17 @@ module.exports = function(passport) {
   },
   function(req, email, password, done) {
     process.nextTick(function() {
+      console.log('Attempting to create new user: "' + email + '".');
+
       User.findOne({'local.email' : email}, function(err, user) {
         if(err) {
+          console.log('Error while getting user "'+ email + '" from database: '  + err);
           return done(err);
         }
 
         if(user) {
-          return done(null, flase, req.flash('signupMessage', 'That email is already taken!'));
+          console.log('Failed to register user "' + email +'": email already taken.');
+          return done(null, false, req.flash('signupMessage', 'That email is already taken!'));
         } else {
 
           var newUser = new User();
@@ -37,6 +41,7 @@ module.exports = function(passport) {
             if(err) {
               throw err;
             }
+            console.log('Successfully created new user: "' + email + '".');
             return done(null, newUser);
           });
         }
@@ -50,20 +55,25 @@ module.exports = function(passport) {
     passReqToCallback : true
   },
   function(req, email, password, done) {
+    console.log('Attempting to log user: "' + email + '".');
 
     User.findOne({ 'local.email' : email }, function(err, user) {
       if(err) {
+        console.log('Error while getting user "'+ email + '" from database: '  + err);
         return done(err);
       }
 
       if(!user) {
-        return done(null, false, req.flash('loginMessage', 'YOU ARE NOT A HORSEEE!'));
+        console.log('Failed to log user "' + email + '": no such user in database');
+        return done(null, false, req.flash('loginMessage', 'No such user in database!'));
       }
 
       if(!user.validPassword(password)) {
+        console.log('Failed to log user "' + email + '": wrong password');
         return done(null, false, req.flash('loginMessage', 'Wrong password.'));
       }
 
+      console.log('Successfully logged in user: "' + email + '".');
       return done(null, user);
     });
   }));
