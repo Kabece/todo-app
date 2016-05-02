@@ -66,7 +66,7 @@ npm install -g nodemon
 
 Co wypadałoby zrobić:
 
-- jakąś autentyfikację użytkownika, ## EDIT - juz w sumie jest, nie idealnie ale jest (mozna jeszcze wejść przez link, ale na stowke da radę to ogarnąć xD),
+- jakąś autentyfikację użytkownika, ## EDIT - juz w sumie jest, nie idealnie ale jest (mozna jeszcze wejść przez link, ale na stowke da radę to ogarnąć xD), /* wydaje mi sie ze done, jedyny bug jaki widze to ze po wylogowaniu mozna cofnac się do tylu i wracamy do apki - jest to troche biedackie ale póki co nie jest to tragedia */
 - połączyć ten REST który teraz jest używany przez angulara z androidem, (polecam to: http://socket.io/)
 - osobne bazy dla osobnych użytkowników?  /* Musze się przyjrzeć mongo, ale wydaje mi się że dobrze byłoby przekminić to na jednej bazie - żeby było spójnie */
 
