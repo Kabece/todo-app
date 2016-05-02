@@ -86,6 +86,7 @@ app.get('/todo', isLoggedIn, function(req, res) {
 
 app.get('/logout', function(req, res) {
   req.logout();
+  req.session.destroy();
   res.redirect('/');
 });
 };
