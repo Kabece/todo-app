@@ -30,7 +30,7 @@
    <div class="container">
     <form class="navbar-form pull-right" action="/logout" method="get">
           <p>
-              Welcome, <strong><%= user.local.email%></strong>
+              Welcome, <strong><%= user.email%></strong>
               <button type="submit" class="btn btn-primary">Logout</button>
           </p>
     </form>
@@ -68,6 +68,11 @@
         </form>
       </div>
     </div>
+
+    <div class="jumbotron text-center">
+      <h1>Todos history:  <span class="label label-info">{{todos.length}}</span></h1>
+    </div>
+
   </div>
 
 </body>

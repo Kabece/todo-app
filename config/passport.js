@@ -22,7 +22,7 @@ module.exports = function(passport) {
     process.nextTick(function() {
       console.log('Attempting to create new user: "' + email + '".');
 
-      User.findOne({'local.email' : email}, function(err, user) {
+      User.findOne({'email' : email}, function(err, user) {
         if(err) {
           console.log('Error while getting user "'+ email + '" from database: '  + err);
           return done(err);
@@ -34,8 +34,8 @@ module.exports = function(passport) {
         } else {
 
           var newUser = new User();
-          newUser.local.email = email;
-          newUser.local.password = newUser.generateHash(password);
+          newUser.email = email;
+          newUser.password = newUser.generateHash(password);
 
           newUser.save(function(err) {
             if(err) {
@@ -57,7 +57,7 @@ module.exports = function(passport) {
   function(req, email, password, done) {
     console.log('Attempting to log user: "' + email + '".');
 
-    User.findOne({ 'local.email' : email }, function(err, user) {
+    User.findOne({ 'email' : email }, function(err, user) {
       if(err) {
         console.log('Error while getting user "'+ email + '" from database: '  + err);
         return done(err);

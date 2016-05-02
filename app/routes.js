@@ -54,6 +54,7 @@ app.delete('/api/todos/:todo_id', function(req, res) {
 
 
 // ROUTES FOR AUTHENTIFICATION
+
 app.get('/', function(req, res) {
   res.render('index.ejs');
 });
@@ -73,7 +74,7 @@ app.get('/signup', function(req, res) {
 });
 
 app.post('/signup', passport.authenticate('local-signup', {
-  successRedirect : './public/index.html',
+  successRedirect : '/login',
   failureRedirect : '/signup',
   failureFlash : true
 }));
@@ -89,6 +90,13 @@ app.get('/logout', function(req, res) {
   req.session.destroy();
   res.redirect('/');
 });
+
+// new user routes
+
+app.get('/api/activeTasks/:userId', function(req,res) {
+  User.find
+});
+
 };
 
 function isLoggedIn(req, res, next) {
