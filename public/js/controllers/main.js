@@ -7,6 +7,12 @@ angular.module('todoController', [])
           $scope.todos = data;
         })
 
+      Todos.getHistory()
+           .success(function(history) {
+             $scope.todoHistory = history;
+           })
+
+
       $scope.createTodo = function() {
         if(!$.isEmptyObject($scope.formData)) {
           Todos.create($scope.formData)

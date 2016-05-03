@@ -14,7 +14,7 @@
     #todo-list  {margin-bottom:30px;}
   </style>
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
 
   <script src="js/controllers/main.js"></script>
@@ -51,7 +51,9 @@
 
         <div class="checkbox" ng-repeat="todo in todos">
           <label>
-            <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{todo.text}}
+            <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{todo.tasks[0].title}} </br>
+            {{todo.tasks[0].description}} </br>
+            {{todo.tasks[0].current_period}}/{{todo.tasks[0].period_quantity}}
           </label>
         </div>
       </div>
@@ -70,7 +72,20 @@
     </div>
 
     <div class="jumbotron text-center">
-      <h1>Todos history:  <span class="label label-info">{{todos.length}}</span></h1>
+      <h1>Todos history:  <span class="label label-info">{{todoHistory.length}}</span></h1>
+    </div>
+
+    <div id="todo-list" class="row">
+      <div class="col-s,-4 col-sm-offset-4">
+
+        <div class="checkbox" ng-repeat="archived in todoHistory">
+          <label>
+            <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{archived.tasks[0].title}} </br>
+            {{archived.tasks[0].description}} </br>
+            {{archived.tasks[0].current_period}}/{{archived.tasks[0].period_quantity}}
+          </label>
+        </div>
+      </div>
     </div>
 
   </div>
