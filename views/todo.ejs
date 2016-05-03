@@ -13,6 +13,20 @@
     body  {padding-top:50px;}
     #todo-list  {margin-bottom:30px;}
   </style>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script
+			  src="https://code.jquery.com/jquery-2.2.3.js"
+			  integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
+			  crossorigin="anonymous"></script>
+  <script
+      			  src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"
+      			  integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI="
+      			  crossorigin="anonymous"></script>
+  <script>
+    $(function() {
+      $( "#datepicker" ).datepicker();
+    });
+</script>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
@@ -25,7 +39,7 @@
 
 <body ng-controller="mainController">
 
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed-top" style="background-color:#5bc0de; padding-bottom:10px;">
   <div class="navbar-inner">
    <div class="container">
     <form class="navbar-form pull-right" action="/logout" method="get">
@@ -52,8 +66,8 @@
         <div class="checkbox" ng-repeat="todo in todos">
           <label>
             <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{todo.tasks[0].title}} </br>
-            {{todo.tasks[0].description}} </br>
-            {{todo.tasks[0].current_period}}/{{todo.tasks[0].period_quantity}}
+              {{todo.tasks[0].description}} </br>
+              {{todo.tasks[0].current_period}}/{{todo.tasks[0].period_quantity}}
           </label>
         </div>
       </div>
@@ -62,11 +76,21 @@
     <div id="todo-form" class="row">
       <div class="col-sm-8 col-sm-offset-2 text-center">
         <form>
-          <div class="form-group">
+          <button type="submit" ng-show="!addTodo" class="btn btn-primary btn-lg" ng-click="toggle()">Add</button>
+          <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="clearAndToggle()" >Cancel</button>
+          <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="addNewTodo()">Add task</button>
 
-            <input type="text" class="form-control input-lg text-center" placeholder="Add your todo! " ng-model="formData.text">
+          <div class="form-group">
+            <p ng-show="addTodo">
+            </br>
+              <input type="text" class="form-control input-lg text-center" placeholder="Todo title " ng-model="formData.title"></br>
+              <input type="text" class="form-control input-lg text-center" placeholder="Todo description " ng-model="formData.description"></br>
+              <input type="text" id="datepicker" class="form-control input-lg text-center" placeholder="Todo date" ng-model="formData.date"></br> <!-- TODO: ogarnac jakis framework ktory tutaj da date -->
+              <input type="text" class="form-control input-lg text-center" placeholder="Todo amount of repeats" ng-model="formData.periodQuantity"></br>
+
+            </p>
           </div>
-          <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+
         </form>
       </div>
     </div>

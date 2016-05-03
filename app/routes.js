@@ -33,6 +33,18 @@ app.post('/api/todos', function(req, res) {
   });
 });
 
+app.post('/api/users/tasks/', function(req,res) {
+  User.update({'email':req.user.mail},{$push:{'tasks':{'title':req.body.title, 'description':req.body.description,
+                                                       'date':req.body.date, 'period_quantity':req.body.periodQuantity,
+                                                       'current_period':0,'done':false}}});
+}, function(err, todo) {
+  if(err) {
+    console.log('Error descr: '+ err);
+    res.send(err);
+  }}
+
+);
+
 app.delete('/api/todos/:todo_id', function(req, res) {
   Todo.remove({
     _id : req.params.todo_id
@@ -147,6 +159,8 @@ app.get('/api/users/:userMail', function(req,res) {
       res.json(tasks);
     });
   });
+
+
 
 };
 
