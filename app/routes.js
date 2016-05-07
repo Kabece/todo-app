@@ -137,7 +137,8 @@ app.get('/api/users/:userMail', function(req,res) {
 
   app.get('/api/users/tasks/active/', function(req,res) {
     console.log('Attempting to get active task(s) for user: "' + req.user.email + '".');
-    User.find({'email':req.user.email},{'_id':0,'tasks': {$elemMatch:{'done':false}}}, function(err,tasks){
+
+    User.aggregate({$match:{'email':req.user.email}},{$unwind:"$tasks"},{$match:{'tasks.done':false}},{$project:{'tasks':1,'_id':0}}, function(err,tasks){
       if (err) {
         console.log('Something went wrong during getting active task(s) for user "' + req.user.email + '": ' + err);
         res.send(err);
@@ -150,7 +151,7 @@ app.get('/api/users/:userMail', function(req,res) {
 
   app.get('/api/users/tasks/inactive/', function(req,res) {
     console.log('Attempting to get inactive task(s) for user: "' + req.user.email + '".');
-    User.find({'email':req.user.email},{'_id':0,'tasks': {$elemMatch:{'done':true}}}, function(err,tasks){
+    User.aggregate({$match:{'email':req.user.email}},{$unwind:"$tasks"},{$match:{'tasks.done':true}},{$project:{'tasks':1,'_id':0}}, function(err,tasks){
       if (err) {
         console.log('Something went wrong during getting inactive task(s) for user "' + req.user.email + '": ' + err);
         res.send(err);

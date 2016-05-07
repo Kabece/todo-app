@@ -65,9 +65,9 @@
 
         <div class="checkbox" ng-repeat="todo in todos">
           <label>
-            <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{todo.tasks[0].title}} </br>
-              {{todo.tasks[0].description}} </br>
-              {{todo.tasks[0].current_period}}/{{todo.tasks[0].period_quantity}}
+            <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{todo.tasks.title}} </br>
+              {{todo.tasks.description}} </br>
+              {{todo.tasks.currentPeriod}}/{{todo.tasks.periodQuantity}}
           </label>
         </div>
       </div>
@@ -101,12 +101,11 @@
 
     <div id="todo-list" class="row">
       <div class="col-s,-4 col-sm-offset-4">
-
         <div class="checkbox" ng-repeat="archived in todoHistory">
           <label>
-            <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{archived.tasks[0].title}} </br>
-            {{archived.tasks[0].description}} </br>
-            {{archived.tasks[0].current_period}}/{{archived.tasks[0].period_quantity}}
+            <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{archived.tasks.title}} </br>
+            {{archived.tasks.description}} </br>
+            {{archived.tasks.currentPeriod}}/{{archived.tasks.periodQuantity}}
           </label>
         </div>
       </div>
