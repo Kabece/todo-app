@@ -15,6 +15,7 @@ db.users.update({"email":"admin"},{$push:
 											{"_id":ObjectId(),"title":"Undone1","description":"Undone1Desc","currentPeriod":5,"periodQuantity":10, "done":false},
 											{"_id":ObjectId(),"title":"Undone2","description":"Undone2Desc","currentPeriod":1,"periodQuantity":7, "done":false},
 											{"_id":ObjectId(),"title":"Undone3","description":"Undone3Desc","currentPeriod":9,"periodQuantity":10, "done":false},
-											{"_id":ObjectId(),"title":"Done3","description":"Done3Desc","currentPeriod":3,"periodQuantity":3, "done":true}
+											{"_id":ObjectId(),"title":"Done3","description":"Done3Desc","currentPeriod":3,"periodQuantity":3, "done":true},
+											{"_id":ObjectId(),"title":"Done4","description":"Done4Desc","currentPeriod":4,"periodQuantity":4, "done":true}
 										]
 }}})
