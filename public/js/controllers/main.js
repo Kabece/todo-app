@@ -2,6 +2,7 @@ angular.module('todoController', [])
   .controller('mainController', function($scope, $http, Todos) {
     $scope.formData = {};
     $scope.addTodo = false;
+    $scope.listName = "NazwaListy"; //ToDo zaladowanie nazwy aktualne listy
 
     $scope.toggle = function() {
       $scope.addTodo = !$scope.addTodo;
@@ -24,7 +25,6 @@ angular.module('todoController', [])
            })
 
       $scope.addNewTodo = function() {
-
            console.log('a');
            Todos.create($scope.formData)
              .success(function(data) {
