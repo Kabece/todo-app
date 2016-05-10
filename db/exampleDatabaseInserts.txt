@@ -1,0 +1,21 @@
+##  Po pierwsze: odpalamy w terminalu "mongo"
+## 	Po drugie: piszemy "use todoAppDb"
+## 	Po trzecie: uzywamy ponizszych komend zeby stworzyc sobie przykladowego usera o emailu admin i haœle admin (powinno dzia³aæ)
+
+
+## insert usera - uwaga: has³o jest jak widaæ zaszyfrowane, w razie dodawania z palca trzeba sobie zaszyfrowaæ na w³asn¹ rêkê i tak wrzuci do db :P
+db.users.insert({"email":"admin","password":"$2a$08$pxXgEVySou13nEz959AgreOPiMgIdsZ1zjGW/TtyB8.21p6PMm8Em"})
+
+
+## kilka przykladowych taskow: poki nie ma pola data ale to jest do rozkminienia
+db.users.update({"email":"admin"},{$push: 
+									{"tasks":{$each: [
+											{"_id":ObjectId(),"title":"Done1","description":"Done1Desc","currentPeriod":3,"periodQuantity":3,"done":true},
+											{"_id":ObjectId(),"title":"Done2","description":"Done2Desc","currentPeriod":11,"periodQuantity":11, "done":true},
+											{"_id":ObjectId(),"title":"Undone1","description":"Undone1Desc","currentPeriod":5,"periodQuantity":10, "done":false},
+											{"_id":ObjectId(),"title":"Undone2","description":"Undone2Desc","currentPeriod":1,"periodQuantity":7, "done":false},
+											{"_id":ObjectId(),"title":"Undone3","description":"Undone3Desc","currentPeriod":9,"periodQuantity":10, "done":false},
+											{"_id":ObjectId(),"title":"Done3","description":"Done3Desc","currentPeriod":3,"periodQuantity":3, "done":true},
+											{"_id":ObjectId(),"title":"Done4","description":"Done4Desc","currentPeriod":4,"periodQuantity":4, "done":true}
+										]
+}}})
