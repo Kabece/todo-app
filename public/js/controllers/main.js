@@ -24,8 +24,6 @@ angular.module('todoController', [])
            })
 
       $scope.addNewTodo = function() {
-
-           console.log('a');
            Todos.create($scope.formData)
              .success(function(data) {
                $scope.formData = {};

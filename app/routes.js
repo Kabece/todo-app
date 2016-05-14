@@ -1,4 +1,3 @@
-var Todo = require('./models/todo');
 var User = require('./models/user');
 
 module.exports = function(app, passport) {
@@ -84,7 +83,12 @@ app.get('/api/users/:userMail', function(req,res) {
       }
 
       console.log('Succesfully got ' + tasks.length + ' active task(s) for user: "' + req.user.email + '".');
-      res.json(tasks);
+      var result = [];
+
+      for(var a = 0; a< tasks.length; a++) {
+          result.push(tasks[a].tasks);
+      }
+      res.json(result);
     });
   });
 
@@ -96,8 +100,13 @@ app.get('/api/users/:userMail', function(req,res) {
         res.send(err);
       }
       console.log('Succesfully got ' + tasks.length + ' inactive task(s) for user: "' + req.user.email + '".');
-      res.json(tasks);
-    });
+      var result = [];
+
+      for(var a = 0; a< tasks.length; a++) {
+          result.push(tasks[a].tasks);
+      }
+      res.json(result);
+    })
   });
 
   app.post('/api/users/tasks/', function(req,res) {
@@ -105,20 +114,25 @@ app.get('/api/users/:userMail', function(req,res) {
     console.log('Title: ' + req.body.title);
     console.log('Description: ' + req.body.description);
     console.log('Date: ' + req.body.date);
-  /*  User.update({'email':req.user.email},{$push:{'tasks':{'title':req.body.title, 'description':req.body.description,
-                                                         'date':req.body.date, 'period_quantity':req.body.periodQuantity,
-                                                         'current_period':0,'done':false}}}); */
     User.findOneAndUpdate(
         {_id: req.user.id},
         {$push: {'tasks':{'title':req.body.title, 'description':req.body.description,
                           'date':req.body.date, 'period_quantity':req.body.periodQuantity,
                           'current_period':0,'done':false}}},
-           {safe: true, upsert: true},
+           {safe: true, upsert: true, new: true},
            function(err, model) {
              if (err) {
                console.log('Mongoose error description: '+ err);
-               res.send(err);
              }
+             console.log('Look! ');
+             var result = [];
+             for(var a = 0; a< model.tasks.length; a++) {
+                 if(model.tasks[a].done != true) {
+                   console.log(model.tasks[a])
+                   result.push(model.tasks[a]);
+                 }
+             }
+            res.json(result);
            }
     );
   }, function(err, todo) {

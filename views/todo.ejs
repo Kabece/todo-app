@@ -22,11 +22,13 @@
       			  src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"
       			  integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI="
       			  crossorigin="anonymous"></script>
+<!--
   <script>
     $(function() {
       $( "#datepicker" ).datepicker();
     });
 </script>
+-->
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
@@ -55,22 +57,21 @@
 
 
   <div class="container">
-
+  </br></br></br>
     <div class="jumbotron text-center">
       <h1>Todos remaining:  <span class="label label-info">{{todos.length}}</span></h1>
     </div>
-
     <div id="todo-list" class="row">
       <div class="col-s,-4 col-sm-offset-4">
 
         <div class="checkbox" ng-repeat="todo in todos">
           <label>
             <input type="checkbox" ng-click="deleteTodo(todo._id)">
-              ID: {{todo.tasks._id}} </br>
-              {{todo.tasks.title}} </br>
-              {{todo.tasks.description}} </br>
+              ID: {{todo._id}} </br>
+              {{todo.title}} </br>
+              {{todo.description}} </br>
               <div ng-show="todo.tasks.periodQuantity != null">
-              {{todo.tasks.currentPeriod}}/{{todo.tasks.periodQuantity}}
+              {{todo.currentPeriod}}/{{todo.periodQuantity}}
             </div>
           </label>
         </div>
@@ -107,10 +108,10 @@
       <div class="col-s,-4 col-sm-offset-4">
         <div class="checkbox" ng-repeat="archived in todoHistory">
           <label>
-            <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{archived.tasks.title}} </br>
-            {{archived.tasks.description}} </br>
+            <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{archived.title}} </br>
+            {{archived.description}} </br>
             <div ng-show="archived.tasks.periodQuantity != null">
-              {{archived.tasks.currentPeriod}}/{{archived.tasks.periodQuantity}}
+              {{archived.currentPeriod}}/{{archived.periodQuantity}}
             </div>
           </label>
         </div>
