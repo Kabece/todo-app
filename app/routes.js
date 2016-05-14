@@ -3,67 +3,6 @@ var User = require('./models/user');
 
 module.exports = function(app, passport) {
 
-// ROUTES FOR TODOO FUNCTIONALITY
-app.get('/api/todos', function(req, res) {
-  Todo.find(function(err, todos) {
-    if (err) {
-      res.send(err);
-    }
-
-    res.json(todos);
-  });
-});
-
-app.post('/api/todos', function(req, res) {
-  Todo.create({
-    text : req.body.text,
-    done : false
-  }, function(err, todo) {
-    if(err) {
-      res.send(err);
-    }
-
-    Todo.find(function(err, todos) {
-      if(err) {
-        res.send(err);
-      }
-
-      res.json(todos);
-    });
-  });
-});
-
-app.post('/api/users/tasks/', function(req,res) {
-  User.update({'email':req.user.mail},{$push:{'tasks':{'title':req.body.title, 'description':req.body.description,
-                                                       'date':req.body.date, 'period_quantity':req.body.periodQuantity,
-                                                       'current_period':0,'done':false}}});
-}, function(err, todo) {
-  if(err) {
-    console.log('Error descr: '+ err);
-    res.send(err);
-  }}
-
-);
-
-app.delete('/api/todos/:todo_id', function(req, res) {
-  Todo.remove({
-    _id : req.params.todo_id
-  }, function(err, todo) {
-    if(err) {
-      res.send(err);
-    }
-
-    Todo.find(function(err, todos) {
-      if(err) {
-        res.send(err);
-      }
-
-      res.json(todos);
-      });
-    });
- });
-
-
 // ROUTES FOR AUTHENTIFICATION
 
 app.get('/', function(req, res) {
@@ -137,7 +76,8 @@ app.get('/api/users/:userMail', function(req,res) {
 
   app.get('/api/users/tasks/active/', function(req,res) {
     console.log('Attempting to get active task(s) for user: "' + req.user.email + '".');
-    User.find({'email':req.user.email},{'_id':0,'tasks': {$elemMatch:{'done':false}}}, function(err,tasks){
+
+    User.aggregate({$match:{'email':req.user.email}},{$unwind:"$tasks"},{$match:{'tasks.done':false}},{$project:{'tasks':1,'_id':0}}, function(err,tasks){
       if (err) {
         console.log('Something went wrong during getting active task(s) for user "' + req.user.email + '": ' + err);
         res.send(err);
@@ -150,7 +90,7 @@ app.get('/api/users/:userMail', function(req,res) {
 
   app.get('/api/users/tasks/inactive/', function(req,res) {
     console.log('Attempting to get inactive task(s) for user: "' + req.user.email + '".');
-    User.find({'email':req.user.email},{'_id':0,'tasks': {$elemMatch:{'done':true}}}, function(err,tasks){
+    User.aggregate({$match:{'email':req.user.email}},{$unwind:"$tasks"},{$match:{'tasks.done':true}},{$project:{'tasks':1,'_id':0}}, function(err,tasks){
       if (err) {
         console.log('Something went wrong during getting inactive task(s) for user "' + req.user.email + '": ' + err);
         res.send(err);
@@ -160,8 +100,18 @@ app.get('/api/users/:userMail', function(req,res) {
     });
   });
 
+  app.post('/api/users/tasks/', function(req,res) {
+    console.log('Attemting to create new task: ');
+    User.update({'email':req.user.email},{$push:{'tasks':{'title':req.body.title, 'description':req.body.description,
+                                                         'date':req.body.date, 'period_quantity':req.body.periodQuantity,
+                                                         'current_period':0,'done':false}}});
+  }, function(err, todo) {
+    if(err) {
+      console.log('Error descr: '+ err);
+      res.send(err);
+    }}
 
-
+  );
 };
 
 function isLoggedIn(req, res, next) {
