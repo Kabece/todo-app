@@ -7,7 +7,6 @@ var userSchema = mongoose.Schema({
     email  : String,
     password : String,
     tasks: [{
-      _id: Number,
       title: String,
       description: String,
       date: {type: Array, "default":[]}, /* na wypadek, jesli ma to byc grupa dni */

@@ -101,10 +101,26 @@ app.get('/api/users/:userMail', function(req,res) {
   });
 
   app.post('/api/users/tasks/', function(req,res) {
-    console.log('Attemting to create new task: ');
-    User.update({'email':req.user.email},{$push:{'tasks':{'title':req.body.title, 'description':req.body.description,
+    console.log('Attemting to create new task for user "' + req.user.email +'": ');
+    console.log('Title: ' + req.body.title);
+    console.log('Description: ' + req.body.description);
+    console.log('Date: ' + req.body.date);
+  /*  User.update({'email':req.user.email},{$push:{'tasks':{'title':req.body.title, 'description':req.body.description,
                                                          'date':req.body.date, 'period_quantity':req.body.periodQuantity,
-                                                         'current_period':0,'done':false}}});
+                                                         'current_period':0,'done':false}}}); */
+    User.findOneAndUpdate(
+        {_id: req.user.id},
+        {$push: {'tasks':{'title':req.body.title, 'description':req.body.description,
+                          'date':req.body.date, 'period_quantity':req.body.periodQuantity,
+                          'current_period':0,'done':false}}},
+           {safe: true, upsert: true},
+           function(err, model) {
+             if (err) {
+               console.log('Mongoose error description: '+ err);
+               res.send(err);
+             }
+           }
+    );
   }, function(err, todo) {
     if(err) {
       console.log('Error descr: '+ err);

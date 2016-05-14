@@ -65,7 +65,9 @@
 
         <div class="checkbox" ng-repeat="todo in todos">
           <label>
-            <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{todo.tasks.title}} </br>
+            <input type="checkbox" ng-click="deleteTodo(todo._id)">
+              ID: {{todo.tasks._id}} </br>
+              {{todo.tasks.title}} </br>
               {{todo.tasks.description}} </br>
               <div ng-show="todo.tasks.periodQuantity != null">
               {{todo.tasks.currentPeriod}}/{{todo.tasks.periodQuantity}}
