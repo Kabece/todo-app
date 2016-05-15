@@ -1,29 +1,30 @@
 <!doctype html>
 
 <html ng-app="Todo">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>TodoApp main page</title>
+    <title>TodoApp main page</title>
 
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/main.css">
-  <style>
-    html  { overflow-y:scroll;}
-    body  {padding-top:50px;}
-    #todo-list  {margin-bottom:30px;}
-  </style>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script
-			  src="https://code.jquery.com/jquery-2.2.3.js"
-			  integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
-			  crossorigin="anonymous"></script>
-  <script
-      			  src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"
-      			  integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI="
-      			  crossorigin="anonymous"></script>
-<!--
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+        body {
+            padding-top: 50px;
+        }
+        #todo-list {
+            margin-bottom: 30px;
+        }
+    </style>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI=" crossorigin="anonymous"></script>
+    <!--
   <script>
     $(function() {
       $( "#datepicker" ).datepicker();
@@ -31,19 +32,27 @@
 </script>
 -->
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 
-  <script src="js/controllers/main.js"></script>
-  <script src="js/services/todos.js"></script>
-  <script src="js/core.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.js"></script>
+
+    <link rel="stylesheet" href="/angular-material/angular-material.css">
+    <script src="angular/angular.js"></script>
+    <script src="angular-animate/angular-animate.js"></script>
+    <script src="angular-aria/angular-aria.js"></script>
+    <script src="angular-messages/angular-messages.js"></script>
+    <script src="angular-material/angular-material.js"></script>
+
+    <script src="js/controllers/main.js"></script>
+    <script src="js/services/todos.js"></script>
+    <script src="js/core.js"></script>
 
 </head>
 
- <body ng-controller="mainController">
-      <div class="navbar navbar-fixed-top" style="background-color:#5bc0de; padding-bottom:10px;">
-         <div class="navbar-inner">
-         <span class="pull-left listname">
+<body ng-controller="mainController">
+    <div class="navbar navbar-fixed-top" style="background-color:#262626; padding-bottom:10px;">
+        <div class="navbar-inner">
+            <span class="pull-left listname">
             <p>{{listName |uppercase}}</p>
          </div>
       </div>
@@ -69,58 +78,67 @@
             <div class="container-fluid">
                <div id="todo-form" class="row">
                   <div class="col-sm-12">
-                     <h5 class="remainingTodos">Todos remaining:  <span class="label label-info">{{todos.length}}</span></h5>
-                     <form>
-                        <button type="submit" ng-show="!addTodo" class="addTask btn btn-primary btn-lg" ng-click="toggle()"><i class="plusik glyphicon glyphicon-plus"></i>Dodaj zadanie do wykonania</button>
-                        <div class="form-group">
-                           <p ng-show="addTodo">
-                              </br>
-                                <input type="text" class="form-control input-lg text-center" placeholder="Todo title " ng-model="formData.title" /></br>
-                                <input type="text" class="form-control input-lg text-center" placeholder="Todo description " ng-model="formData.description" /></br>
-                                <input type="date" id="datepicker" class="form-control input-lg text-center" placeholder="Todo date" ng-model="formData.date" /></br> <!-- TODO: ogarnac jakis framework ktory tutaj da date -->
-                                <input type="number" class="form-control input-lg text-center" placeholder="Todo amount of repeats" ng-model="formData.periodQuantity" /></br>
-                           </p>
-                        </div>
-                        <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="clearAndToggle()" >Cancel</button>
-                        <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="addNewTodo()">Add task</button>
-                     </form>
-                  </div>
-               </div>
-               <div id="todo-list" class="row">
-                                 <div class="col-s,-4 col-sm-offset-4">
-                                    <div class="checkbox" ng-repeat="todo in todos">
-                                      <label>
-                                                  <input type="checkbox" ng-click="archiveTask(todo._id)">
-                                                    ID: {{todo._id}} </br>
-                                                    {{todo.title}} </br>
-                                                    {{todo.description}} </br>
-                                                    <div ng-show="todo.periodQuantity != null">
-                                                      {{todo.currentPeriod}}/{{todo.periodQuantity}}</br>
-                                                    </div>
-                                                </label>
-                                    </div>
-                                 </div>
-                              </div>
-               <div class="jumbotron text-center">
-                  <h1>Todos history:  <span class="label label-info">{{todoHistory.length}}</span></h1>
-               </div>
-               <div id="todo-list" class="row">
-                  <div class="col-s,-4 col-sm-offset-4">
-                     <div class="checkbox" ng-repeat="archived in todoHistory">
-                        <label>
-                                   <input type="checkbox"> {{archived.title}} </br>
-                                   {{archived.description}} </br>
-                                   <div ng-show="archived.tasks.periodQuantity != null">
-                                     {{archived.currentPeriod}}/{{archived.periodQuantity}}
-                                   </div>
-                                 </label>
-                     </div>
-                  </div>
-               </div>
+                     <h4 class="remainingTodos">Todos remaining:  <span class="label label-info">{{todos.length}}</span>
+            </h4>
+            <form>
+                <button type="submit" ng-show="!addTodo" class="addTask btn btn-primary btn-lg" ng-click="toggle()"><i class="plusik glyphicon glyphicon-plus"></i>Dodaj zadanie do wykonania</button>
+                <div class="form-group">
+                    <p ng-show="addTodo">
+                        </br>
+                        <input type="text" class="form-control input-lg text-center" placeholder="Todo title " ng-model="formData.title" />
+                        </br>
+                        <input type="text" class="form-control input-lg text-center" placeholder="Todo description " ng-model="formData.description" />
+                        </br>
+                       <span style="padding: 40px;" ng-cloak="" class="datepickerdemoBasicUsage">
+                                <md-content>
+                                  <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                                </md-content>
+                        </span>
+                        </br>
+                        <input type="number" class="form-control input-lg text-center" placeholder="Todo amount of repeats" ng-model="formData.periodQuantity" />
+                        </br>
+                    </p>
+                </div>
+                <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="clearAndToggle()">Cancel</button>
+                <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="addNewTodo()">Add task</button>
+            </form>
+        </div>
+    </div>
+    <div id="todo-list" class="row">
+        <div class="col-s,-4 col-sm-offset-4">
+            <div class="checkbox" ng-repeat="todo in todos">
+                <label>
+                    <input type="checkbox" ng-click="archiveTask(todo._id)"> ID: {{todo._id}} </br>
+                    {{todo.title}} </br>
+                    {{todo.description}} </br>
+                    <div ng-show="todo.periodQuantity != null">
+                        {{todo.currentPeriod}}/{{todo.periodQuantity}}</br>
+                    </div>
+                </label>
             </div>
-         </div>
-         <!-- /#page-content-wrapper -->
-      </div>
-      <!-- /#wrapper -->
-   </body>
+        </div>
+    </div>
+    <div class="jumbotron text-center">
+        <h1>Todos history:  <span class="label label-info">{{todoHistory.length}}</span></h1>
+    </div>
+    <div id="todo-list" class="row">
+        <div class="col-s,-4 col-sm-offset-4">
+            <div class="checkbox" ng-repeat="archived in todoHistory">
+                <label>
+                    <input type="checkbox"> {{archived.title}} </br>
+                    {{archived.description}} </br>
+                    <div ng-show="archived.tasks.periodQuantity != null">
+                        {{archived.currentPeriod}}/{{archived.periodQuantity}}
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+</body>
+
 </html>
