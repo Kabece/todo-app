@@ -110,15 +110,16 @@ app.get('/api/users/:userMail', function(req,res) {
   });
 
   app.post('/api/users/tasks/', function(req,res) {
-    console.log('Attemting to create new task for user "' + req.user.email +'": ');
+    console.log('Attemting to create new task for user "' + req.user.id +'": ');
     console.log('Title: ' + req.body.title);
     console.log('Description: ' + req.body.description);
     console.log('Date: ' + req.body.date);
+    console.log('PeriodQuantity: ' + req.body.periodQuantity);
     User.findOneAndUpdate(
         {_id: req.user.id},
         {$push: {'tasks':{'title':req.body.title, 'description':req.body.description,
-                          'date':req.body.date, 'period_quantity':req.body.periodQuantity,
-                          'current_period':0,'done':false}}},
+                          'date':req.body.date, 'periodQuantity':req.body.periodQuantity,
+                          'currentPeriod':0,'done':false}}},
            {safe: true, upsert: true, new: true},
            function(err, model) {
              if (err) {
