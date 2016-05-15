@@ -106,7 +106,7 @@ color: #fff;
 }
 
 .sidebar-nav > .sidebar-brand {
-    height: 50px;
+    height: 0px;
     font-size: 18px;
     line-height: 60px;
     background: #fff;

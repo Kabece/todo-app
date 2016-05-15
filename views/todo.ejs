@@ -40,84 +40,89 @@
 
 </head>
 
-<body ng-controller="mainController">
-
-<div class="navbar navbar-fixed-top" style="background-color:#5bc0de; padding-bottom:10px;">
-  <div class="navbar-inner">
-   <div class="container">
-    <form class="navbar-form pull-right" action="/logout" method="get">
-          <p>
-              Welcome, <strong><%= user.email%></strong>
-              <button type="submit" class="btn btn-primary">Logout</button>
-          </p>
-    </form>
-   </div>
-  </div>
- </div>
-
-
-  <div class="container">
-    <div class="jumbotron text-center">
-      <h1>Todos remaining:  <span class="label label-info">{{todos.length}}</span></h1>
-    </div>
-    <div id="todo-list" class="row">
-      <div class="col-s,-4 col-sm-offset-4">
-
-        <div class="checkbox" ng-repeat="todo in todos">
-          <label>
-            <input type="checkbox" ng-click="archiveTask(todo._id)">
-              ID: {{todo._id}} </br>
-              {{todo.title}} </br>
-              {{todo.description}} </br>
-              <div ng-show="todo.periodQuantity != null">
-                {{todo.currentPeriod}}/{{todo.periodQuantity}}</br>
-              </div>
-          </label>
-        </div>
+ <body ng-controller="mainController">
+      <div class="navbar navbar-fixed-top" style="background-color:#5bc0de; padding-bottom:10px;">
+         <div class="navbar-inner">
+         <span class="pull-left listname">
+            <p>{{listName |uppercase}}</p>
+         </div>
       </div>
-    </div>
-
-    <div id="todo-form" class="row">
-      <div class="col-sm-8 col-sm-offset-2 text-center">
-        <form>
-          <button type="submit" ng-show="!addTodo" class="btn btn-primary btn-lg" ng-click="toggle()">Add</button>
-          <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="clearAndToggle()" >Cancel</button>
-          <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="addNewTodo()">Add task</button>
-
-          <div class="form-group">
-            <p ng-show="addTodo">
-            </br>
-              <input type="text" class="form-control input-lg text-center" placeholder="Todo title " ng-model="formData.title"></br>
-              <input type="text" class="form-control input-lg text-center" placeholder="Todo description " ng-model="formData.description"></br>
-              <input type="date" id="datepicker" class="form-control input-lg text-center" placeholder="Todo date" ng-model="formData.date"></br> <!-- TODO: ogarnac jakis framework ktory tutaj da date -->
-              <input type="number" class="form-control input-lg text-center" placeholder="Todo amount of repeats" ng-model="formData.periodQuantity"></br>
-
-            </p>
-          </div>
-
-        </form>
-      </div>
-    </div>
-
-    <div class="jumbotron text-center">
-      <h1>Todos history:  <span class="label label-info">{{todoHistory.length}}</span></h1>
-    </div>
-
-    <div id="todo-list" class="row">
-      <div class="col-s,-4 col-sm-offset-4">
-        <div class="checkbox" ng-repeat="archived in todoHistory">
-          <label>
-            <input type="checkbox"> {{archived.title}} </br>
-            {{archived.description}} </br>
-            <div ng-show="archived.tasks.periodQuantity != null">
-              {{archived.currentPeriod}}/{{archived.periodQuantity}}
+      <div id="wrapper">
+         <!-- Sidebar -->
+         <div id="sidebar-wrapper">
+         <div>
+         </div>
+            <ul class="sidebar-nav">
+               <li class="sidebar-brand">
+                   <form class="navbar-form pull-right loggedUser" action="/logout" method="get">
+               <p>
+                  Welcome, <strong><%= user.email%></strong>
+                  <button type="submit" class="btn btn-primary">Logout</button>
+               </p>
+            </form>
+               </li>
+            </ul>
+         </div>
+         <!-- /#sidebar-wrapper -->
+         <!-- Page Content -->
+         <div id="page-content-wrapper">
+            <div class="container-fluid">
+               <div class="jumbotron text-center">
+                  <h1>Todos remaining:  <span class="label label-info">{{todos.length}}</span></h1>
+               </div>
+               <div id="todo-list" class="row">
+                  <div class="col-s,-4 col-sm-offset-4">
+                     <div class="checkbox" ng-repeat="todo in todos">
+                       <label>
+                                   <input type="checkbox" ng-click="archiveTask(todo._id)">
+                                     ID: {{todo._id}} </br>
+                                     {{todo.title}} </br>
+                                     {{todo.description}} </br>
+                                     <div ng-show="todo.periodQuantity != null">
+                                       {{todo.currentPeriod}}/{{todo.periodQuantity}}</br>
+                                     </div>
+                                 </label>
+                     </div>
+                  </div>
+               </div>
+               <div id="todo-form" class="row">
+                  <div class="col-sm-8 col-sm-offset-2 text-center">
+                     <form>
+                        <button type="submit" ng-show="!addTodo" class="btn btn-primary btn-lg" ng-click="toggle()">Add</button>
+                        <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="clearAndToggle()" >Cancel</button>
+                        <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="addNewTodo()">Add task</button>
+                        <div class="form-group">
+                           <p ng-show="addTodo">
+                              </br>
+                                <input type="text" class="form-control input-lg text-center" placeholder="Todo title " ng-model="formData.title" /></br>
+                                <input type="text" class="form-control input-lg text-center" placeholder="Todo description " ng-model="formData.description" /></br>
+                                <input type="date" id="datepicker" class="form-control input-lg text-center" placeholder="Todo date" ng-model="formData.date" /></br> <!-- TODO: ogarnac jakis framework ktory tutaj da date -->
+                                <input type="number" class="form-control input-lg text-center" placeholder="Todo amount of repeats" ng-model="formData.periodQuantity" /></br>
+                           </p>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+               <div class="jumbotron text-center">
+                  <h1>Todos history:  <span class="label label-info">{{todoHistory.length}}</span></h1>
+               </div>
+               <div id="todo-list" class="row">
+                  <div class="col-s,-4 col-sm-offset-4">
+                     <div class="checkbox" ng-repeat="archived in todoHistory">
+                        <label>
+                                   <input type="checkbox"> {{archived.title}} </br>
+                                   {{archived.description}} </br>
+                                   <div ng-show="archived.tasks.periodQuantity != null">
+                                     {{archived.currentPeriod}}/{{archived.periodQuantity}}
+                                   </div>
+                                 </label>
+                     </div>
+                  </div>
+               </div>
             </div>
-          </label>
-        </div>
+         </div>
+         <!-- /#page-content-wrapper -->
       </div>
-    </div>
-
-  </div>
-
-</body>
+      <!-- /#wrapper -->
+   </body>
 </html>

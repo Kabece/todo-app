@@ -2,6 +2,7 @@ angular.module('todoController', [])
   .controller('mainController', function($scope, $http, Todos) {
     $scope.formData = {};
     $scope.addTodo = false;
+    $scope.listName = "Listy";
 
     $scope.toggle = function() {
       $scope.addTodo = !$scope.addTodo;
@@ -24,6 +25,10 @@ angular.module('todoController', [])
            })
 
       $scope.addNewTodo = function() {
+      if (Number.isInteger($scope.formData.periodQuantity) === false){
+        alert("Ilość powtórzeń musi być liczbą!");
+        return false;
+       }
            Todos.create($scope.formData)
              .success(function(data) {
                $scope.formData = {};
