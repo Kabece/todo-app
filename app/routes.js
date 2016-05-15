@@ -124,11 +124,9 @@ app.get('/api/users/:userMail', function(req,res) {
              if (err) {
                console.log('Mongoose error description: '+ err);
              }
-             console.log('Look! ');
              var result = [];
              for(var a = 0; a< model.tasks.length; a++) {
                  if(model.tasks[a].done != true) {
-                   console.log(model.tasks[a])
                    result.push(model.tasks[a]);
                  }
              }
@@ -141,6 +139,25 @@ app.get('/api/users/:userMail', function(req,res) {
       res.send(err);
     }}
 
+  );
+
+  app.post('/api/users/tasks/archieve/:task_id', function(req,res) {
+      console.log('Attemting to archieve task ' + req.params.task_id + ' for user "' + req.user.email +'".');
+        User.findOneAndUpdate({'tasks._id': req.params.task_id},{$set: {'tasks.$.done': true}},
+        {safe: true, upsert: true, new: true},
+        function(err, model){
+          if (err) {
+            console.log('Mongoose error description: '+ err);
+          }
+          var result = [];
+          for(var a = 0; a< model.tasks.length; a++) {
+              if(model.tasks[a].done != true) {
+                result.push(model.tasks[a]);
+              }
+          }
+         res.json(result);
+        });
+    }
   );
 };
 

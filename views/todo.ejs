@@ -66,7 +66,7 @@
 
         <div class="checkbox" ng-repeat="todo in todos">
           <label>
-            <input type="checkbox" ng-click="deleteTodo(todo._id)">
+            <input type="checkbox" ng-click="archiveTask(todo._id)">
               ID: {{todo._id}} </br>
               {{todo.title}} </br>
               {{todo.description}} </br>
@@ -108,7 +108,7 @@
       <div class="col-s,-4 col-sm-offset-4">
         <div class="checkbox" ng-repeat="archived in todoHistory">
           <label>
-            <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{archived.title}} </br>
+            <input type="checkbox"> {{archived.title}} </br>
             {{archived.description}} </br>
             <div ng-show="archived.tasks.periodQuantity != null">
               {{archived.currentPeriod}}/{{archived.periodQuantity}}

@@ -43,10 +43,10 @@ angular.module('todoController', [])
         };
       };
 
-      $scope.deleteTodo = function(id) {
-        Todos.delete(id)
-          .success(function(data) {
-            $scope.todos = data;
-          });
-      };
+      $scope.archiveTask = function(id) {
+        Todos.archive(id)
+             .success(function(todos) {
+               $scope.todos = todos;
+             });
+      }
   });
