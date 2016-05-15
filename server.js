@@ -18,6 +18,7 @@ mongoose.connect(database.url);
 require('./config/passport')(passport);
 
 app.use(express.static('public'));
+app.use(express.static('node_modules'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());
