@@ -46,7 +46,8 @@ angular.module('todoController', [])
       $scope.archiveTask = function(id) {
         Todos.archive(id)
              .success(function(todos) {
-               $scope.todos = todos;
+               $scope.todos = todos[0];
+               $scope.todoHistory = todos[1];
              });
       }
   });

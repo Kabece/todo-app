@@ -149,13 +149,20 @@ app.get('/api/users/:userMail', function(req,res) {
           if (err) {
             console.log('Mongoose error description: '+ err);
           }
-          var result = [];
+          var active = [];
+          var inactive = [];
+          var allTasks = [];
           for(var a = 0; a< model.tasks.length; a++) {
               if(model.tasks[a].done != true) {
-                result.push(model.tasks[a]);
+                active.push(model.tasks[a]);
+              } else {
+                inactive.push(model.tasks[a]);
               }
           }
-         res.json(result);
+          allTasks.push(active);
+          allTasks.push(inactive);
+
+         res.json(allTasks);
         });
     }
   );
