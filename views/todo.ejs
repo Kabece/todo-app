@@ -67,30 +67,11 @@
          <!-- Page Content -->
          <div id="page-content-wrapper">
             <div class="container-fluid">
-               <div class="jumbotron text-center">
-                  <h1>Todos remaining:  <span class="label label-info">{{todos.length}}</span></h1>
-               </div>
-               <div id="todo-list" class="row">
-                  <div class="col-s,-4 col-sm-offset-4">
-                     <div class="checkbox" ng-repeat="todo in todos">
-                       <label>
-                                   <input type="checkbox" ng-click="archiveTask(todo._id)">
-                                     ID: {{todo._id}} </br>
-                                     {{todo.title}} </br>
-                                     {{todo.description}} </br>
-                                     <div ng-show="todo.periodQuantity != null">
-                                       {{todo.currentPeriod}}/{{todo.periodQuantity}}</br>
-                                     </div>
-                                 </label>
-                     </div>
-                  </div>
-               </div>
                <div id="todo-form" class="row">
-                  <div class="col-sm-8 col-sm-offset-2 text-center">
+                  <div class="col-sm-12">
+                     <h5 class="remainingTodos">Todos remaining:  <span class="label label-info">{{todos.length}}</span></h5>
                      <form>
-                        <button type="submit" ng-show="!addTodo" class="btn btn-primary btn-lg" ng-click="toggle()">Add</button>
-                        <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="clearAndToggle()" >Cancel</button>
-                        <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="addNewTodo()">Add task</button>
+                        <button type="submit" ng-show="!addTodo" class="addTask btn btn-primary btn-lg" ng-click="toggle()"><i class="plusik glyphicon glyphicon-plus"></i>Dodaj zadanie do wykonania</button>
                         <div class="form-group">
                            <p ng-show="addTodo">
                               </br>
@@ -100,9 +81,26 @@
                                 <input type="number" class="form-control input-lg text-center" placeholder="Todo amount of repeats" ng-model="formData.periodQuantity" /></br>
                            </p>
                         </div>
+                        <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="clearAndToggle()" >Cancel</button>
+                        <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="addNewTodo()">Add task</button>
                      </form>
                   </div>
                </div>
+               <div id="todo-list" class="row">
+                                 <div class="col-s,-4 col-sm-offset-4">
+                                    <div class="checkbox" ng-repeat="todo in todos">
+                                      <label>
+                                                  <input type="checkbox" ng-click="archiveTask(todo._id)">
+                                                    ID: {{todo._id}} </br>
+                                                    {{todo.title}} </br>
+                                                    {{todo.description}} </br>
+                                                    <div ng-show="todo.periodQuantity != null">
+                                                      {{todo.currentPeriod}}/{{todo.periodQuantity}}</br>
+                                                    </div>
+                                                </label>
+                                    </div>
+                                 </div>
+                              </div>
                <div class="jumbotron text-center">
                   <h1>Todos history:  <span class="label label-info">{{todoHistory.length}}</span></h1>
                </div>
