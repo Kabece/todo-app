@@ -5,6 +5,29 @@ body {
 #todo-list {
     margin-bottom: 30px;
 }
+
+.taskList-body li{
+  background:#f2f2f2;
+  border-radius:3px;
+  font-size: 15px;
+  padding: 12px 40px;
+  height:46px;
+  list-style:none;
+  padding-left:40px;
+  padding-right:10px;
+  margin-left: -40px;
+  position:relative;
+}
+
+.showDate{
+    margin-left: 30px;
+}
+
+.showDescription{
+    float: right;
+    margin: -7px !important
+}
+
 .listname {
     margin-left: 300px;
     font-size: 20px;
@@ -34,6 +57,7 @@ body {
 .btn{
     background: #CF5813;
 }
+
 
 .datepickerdemoBasicUsage {
 

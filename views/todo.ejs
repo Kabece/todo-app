@@ -115,33 +115,41 @@
         </div>
     </div>
     <div id="todo-list" class="row">
-        <div class="col-s,-4 col-sm-offset-4">
-            <div class="checkbox" ng-repeat="todo in todos">
-                <label>
-                    <input type="checkbox" ng-click="archiveTask(todo._id)"> ID: {{todo._id}} </br>
-                    {{todo.title}} </br>
-                    {{todo.description}} </br>
-                    <div ng-show="todo.periodQuantity != null">
-                        {{todo.currentPeriod}}/{{todo.periodQuantity}}</br>
+        <div class="col-sm-12">
+            <ul class="taskList-body">
+            <li class="checkbox" ng-repeat="todo in todos">
+
+                    <div class="pull-left"><input type="checkbox" ng-click="archiveTask(todo._id)" /><!-- ID: {{todo._id}} </br>-->
+                    <p class="pull-left">{{todo.title}} </br></p>
+                    <p ng-show="showDescription">{{todos[$index].description}} </br></p>
+                        <div class="showDate pull-right" ng-show="todo.periodQuantity != null">
+                            {{todo.currentPeriod}}/{{todo.periodQuantity}}</br>
+                        </div>
                     </div>
-                </label>
-            </div>
+                    <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="showDes(); $parent.selected=$index">
+                          Show description
+                    </md-button>
+            </li>
+            </ul>
         </div>
     </div>
     <div class="jumbotron text-center">
         <h1>Todos history:  <span class="label label-info">{{todoHistory.length}}</span></h1>
     </div>
     <div id="todo-list" class="row">
-        <div class="col-s,-4 col-sm-offset-4">
-            <div class="checkbox" ng-repeat="archived in todoHistory">
-                <label>
-                    <input type="checkbox"> {{archived.title}} </br>
-                    {{archived.description}} </br>
+        <div class="col-sm-12">
+            <ul class="taskList-body">
+            <li class="checkbox" ng-repeat="archived in todoHistory">
+                <div class="pull-left"><input type="checkbox"> {{archived.title}} </br>
+                    <p ng-show="showDescription">{{archived.description}}</br> </p>
                     <div ng-show="archived.tasks.periodQuantity != null">
                         {{archived.currentPeriod}}/{{archived.periodQuantity}}
                     </div>
-                </label>
-            </div>
+                </div>
+                <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="showDes()">
+                                          Show description
+                                    </md-button>
+            </li>
         </div>
     </div>
     </div>

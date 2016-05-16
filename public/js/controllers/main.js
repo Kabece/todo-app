@@ -3,6 +3,11 @@ angular.module('todoController', [])
     $scope.formData = {};
     $scope.addTodo = false;
     $scope.listName = "Listy";
+    $scope.showDescription = false;
+
+    $scope.showDes = function(){
+        $scope.showDescription = !$scope.showDescription;
+    }
 
      $scope.toggle = function() {
       $scope.addTodo = !$scope.addTodo;
