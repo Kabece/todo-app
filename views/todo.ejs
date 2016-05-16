@@ -46,7 +46,7 @@
     <script src="js/controllers/main.js"></script>
     <script src="js/services/todos.js"></script>
     <script src="js/core.js"></script>
-
+    <script src="js/utilities/utils.js"></script>
 </head>
 
 <body ng-controller="mainController">
@@ -88,12 +88,12 @@
                     </br>
                     <md-input-container class="md-block">
                         <label>Todo title</label>
-                        <input md-maxlength="100" required="" md-no-asterisk="" name="description" ng-model="formData.title">
+                        <input md-maxlength="100" required="" maxlength="100" md-no-asterisk="" name="description" ng-model="formData.title">
                         </br>
                     </md-input-container>
                     <md-input-container class="md-block">
                         <label>Todo description</label>
-                        <input type="text" md-maxlength="255" required="" class="form-control input-lg text-center" ng-model="formData.description">
+                        <input type="text" md-maxlength="255" maxlength="255" required="" class="form-control input-lg text-center" ng-model="formData.description">
                         </br>
                     </md-input-container>
                     <span style="padding: 40px;" ng-cloak="" class="datepickerdemoBasicUsage">
@@ -108,7 +108,7 @@
                     </br>
                     <md-input-container class="md-block">
                         <label>Todo amount of repeats</label>
-                        <input type="number" value="1" required="" class="form-control input-lg text-center" ng-model="formData.periodQuantity" ng-disabled="!isPeriodicalTask">
+                        <input type="number" onkeydown="return filterDigits(event)" value="1" required class="form-control input-lg text-center" ng-model="formData.periodQuantity" ng-disabled="!isPeriodicalTask">
                         </br>
                     </md-input-container>
 
@@ -122,7 +122,8 @@
     <div id="todo-list" class="row">
         <div class="col-sm-12">
             <ul class="taskList-body">
-                <li class="checkbox" ng-repeat="todo in todos">
+              <div ng-repeat="todo in todos">
+                <li class="checkbox">
 
                     <div class="pull-left">
                         <input type="checkbox" ng-click="archiveTask(todo._id)" />
@@ -141,6 +142,7 @@
 
 
                 </li>
+              </div>
             </ul>
         </div>
     </div>

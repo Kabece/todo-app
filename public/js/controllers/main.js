@@ -31,13 +31,10 @@ angular.module('todoController', [])
            })
 
       $scope.addNewTodo = function() {
-      if (Number.isInteger($scope.formData.periodQuantity) === false){
-        alert("Ilość powtórzeń musi być liczbą!");
-        return false;
-       }
            Todos.create($scope.formData)
              .success(function(data) {
                $scope.formData = {};
+               $scope.isPeriodicalTask=  false;
                $scope.todos = data;
              });
 
