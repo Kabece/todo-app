@@ -4,6 +4,7 @@ angular.module('todoController', [])
     $scope.addTodo = false;
     $scope.listName = "Listy";
     $scope.showDescription = false;
+    $scope.isPeriodicalTask = false;
 
     $scope.showDes = function(){
         $scope.showDescription = !$scope.showDescription;

@@ -102,9 +102,13 @@
                                 </md-content>
                         </span>
                     </br>
+                    <md-checkbox ng-model="isPeriodicalTask" aria-label="Is periodical?">
+                      Is periodical?
+                    </md-checkbox>
+                    </br>
                     <md-input-container class="md-block">
                         <label>Todo amount of repeats</label>
-                        <input type="number" value="1" required="" class="form-control input-lg text-center" ng-model="formData.periodQuantity">
+                        <input type="number" value="1" required="" class="form-control input-lg text-center" ng-model="formData.periodQuantity" ng-disabled="!isPeriodicalTask">
                         </br>
                     </md-input-container>
 
