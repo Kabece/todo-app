@@ -38,6 +38,7 @@ body {
 .addTask {
     width: 100% !important;
     text-align: left;
+    margin-top: 10px;
 }
 .plusik {
     padding-right: 10px;

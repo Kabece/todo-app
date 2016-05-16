@@ -142,6 +142,26 @@ app.get('/api/users/:userMail', function(req,res) {
 
   );
 
+  app.post('/api/users/tasks/update/:taskId/:change', function(req,res) {
+    User.findOneAndUpdate({'tasks._id': req.params.taskId},{$inc: {'tasks.$.currentPeriod': req.params.change}},
+    {safe: true, upsert: true, new: true},
+    function(err, model){
+      if (err) {
+        console.log('Mongoose error description: '+ err);
+      }
+      var active = [];
+      for(var a = 0; a< model.tasks.length; a++) {
+          if(model.tasks[a].done != true) {
+            active.push(model.tasks[a]);
+          }
+      }
+
+     res.json(active);
+    });
+
+  }
+);
+
   app.post('/api/users/tasks/archieve/:task_id', function(req,res) {
       console.log('Attemting to archieve task ' + req.params.task_id + ' for user "' + req.user.email +'".');
         User.findOneAndUpdate({'tasks._id': req.params.task_id},{$set: {'tasks.$.done': true}},

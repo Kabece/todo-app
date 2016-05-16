@@ -41,15 +41,16 @@ angular.module('todoController', [])
         $scope.addTodo = !$scope.addTodo;
       }
 
-      $scope.createTodo = function() {
-        if(!$.isEmptyObject($scope.formData)) {
-          Todos.create($scope.formData)
-            .success(function(data) {
-              $scope.formData = {};
-              $scope.todos = data;
-            });
-        };
-      };
+      $scope.periodUpdate = function(id, value) {
+          var data = {
+              taskId : id,
+              periodChange : value
+          }
+          Todos.quantityUpdate(data)
+               .success(function(tasks) {
+                 $scope.todos = tasks;
+               });
+      }
 
       $scope.archiveTask = function(id) {
         Todos.archive(id)

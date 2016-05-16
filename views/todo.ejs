@@ -80,7 +80,7 @@
                   <div class="col-sm-12">
 
             <form>
-                <button type="submit" ng-show="!addTodo" class="addTask btn btn-primary btn-lg" ng-click="toggle()"><i class="plusik glyphicon glyphicon-plus"></i>Dodaj zadanie do wykonania</button>
+                <button type="submit" ng-show="!addTodo" class="addTask btn btn-primary btn-lg" ng-click="toggle()"><i class="plusik glyphicon glyphicon-plus"></i>Add todo task</button>
                 <h3>Todos remaining:  <span class="label label-info">{{todos.length}}</span>
             </h3>
             <div class="form-group">
@@ -132,14 +132,24 @@
                         </p>
                         <p ng-show="showDescription">{{todos[$index].description}} </br>
                         </p>
-                        <div class="showDate pull-right" ng-show="todo.periodQuantity != null">
+                        <div class="showDate pull-right" ng-show="todo.periodQuantity > 1">
                             {{todo.currentPeriod}}/{{todo.periodQuantity}}</br>
                         </div>
                     </div>
+
+
                     <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="showAdvanced($event, $index)">
                         Show description
                     </md-button>
-
+                      <!--TODO Gandi - poprawic css :(  -->
+                      <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="periodUpdate(todo._id, -1)" style="margin-right:10px !important;"
+                                 ng-show="todo.periodQuantity > 1 && todo.currentPeriod > 0">
+                                            -1
+                      </md-button>
+                      <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="periodUpdate(todo._id, +1)" style="margin-right:10px !important;"
+                                 ng-show="todo.periodQuantity > 1  && todo.currentPeriod < todo.periodQuantity">
+                                            +1
+                      </md-button>
 
                 </li>
               </div>

@@ -10,11 +10,11 @@ angular.module('todoService', [])
       create : function(todoData) {
         return $http.post('/api/users/tasks/', todoData);
       },
-    delete : function(id) {
-        return $http.delete('/api/todos/' + id);
+      archive : function(id) {
+        return $http.post('/api/users/tasks/archieve/' + id);
       },
-    archive : function(id) {
-      return $http.post('/api/users/tasks/archieve/' + id);
-    }
+      quantityUpdate: function(task) {
+        return $http.post('/api/users/tasks/update/' + task.taskId + '/'+ task.periodChange);
+      }
     }
   });
