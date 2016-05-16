@@ -43,9 +43,7 @@ body {
     padding-right: 10px;
     font-size: 0.8em;
 }
-.remainingTodos {
-    float: right;
-}
+
 .navbar {
     height: 45px !important;
 }

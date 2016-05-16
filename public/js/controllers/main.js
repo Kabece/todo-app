@@ -1,5 +1,5 @@
 angular.module('todoController', [])
-  .controller('mainController', function($scope, $http, Todos) {
+  .controller('mainController', function($scope, $http, $mdMedia, $mdDialog, Todos) {
     $scope.formData = {};
     $scope.addTodo = false;
     $scope.listName = "Listy";
@@ -77,4 +77,42 @@ angular.module('todoController', [])
       var day = date.getDay();
       return day === 0 || day === 6;
     }
+
+ $scope.status = '  ';
+  $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+
+     $scope.showAdvanced = function(ev, index) {
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+
+        $mdDialog.show({
+          controller: DialogController,
+          controllerAs: 'crtl',
+          templateUrl: 'dialog1.tmpl.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          fullscreen: useFullScreen,
+          locals: {
+            items: $scope.todos[index]
+          }
+        })
+        .then(function(answer) {
+          $scope.status = 'You said the information was "' + answer + '".';
+        }, function() {
+          $scope.status = 'You cancelled the dialog.';
+        });
+     }
+
+     function DialogController($scope, $mdDialog, locals) {
+        $scope.locals = locals;
+       $scope.hide = function() {
+         $mdDialog.hide();
+       };
+
+       $scope.cancel = function() {
+         $mdDialog.cancel();
+       };
+     }
+
+
   });

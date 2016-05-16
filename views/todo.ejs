@@ -78,8 +78,7 @@
             <div class="container-fluid">
                <div id="todo-form" class="row">
                   <div class="col-sm-12">
-                     <h4 class="remainingTodos">Todos remaining:  <span class="label label-info">{{todos.length}}</span>
-            </h4>
+                     <h3>Todos remaining:  <span class="label label-info">{{todos.length}}</span></h3>
             <form>
                 <button type="submit" ng-show="!addTodo" class="addTask btn btn-primary btn-lg" ng-click="toggle()"><i class="plusik glyphicon glyphicon-plus"></i>Dodaj zadanie do wykonania</button>
                 <div class="form-group">
@@ -126,15 +125,48 @@
                             {{todo.currentPeriod}}/{{todo.periodQuantity}}</br>
                         </div>
                     </div>
-                    <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="showDes(); $parent.selected=$index">
+                    <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="showAdvanced($event, $index)" value="$parent.selected=$index;">
                           Show description
                     </md-button>
+
+
             </li>
             </ul>
         </div>
     </div>
-    <div class="jumbotron text-center">
-        <h1>Todos history:  <span class="label label-info">{{todoHistory.length}}</span></h1>
+
+<script type="text/ng-template" id="dialog1.tmpl.html">
+
+                            <md-dialog ng-cloak>
+                              <form>
+                                <md-toolbar>
+                                  <div class="md-toolbar-tools">
+                                    <h2>{{locals.items.title}}</h2>
+                                    <span flex></span>
+                                    <md-button class="md-icon-button" ng-click="cancel()">
+                                    </md-button>
+                                  </div>
+                                </md-toolbar>
+
+                                <md-dialog-content>
+                                  <div class="md-dialog-content">
+                                    <h2>{{locals.items.description}}</h2>
+
+                                  </div>
+                                </md-dialog-content>
+
+                                <md-dialog-actions layout="row">
+
+                                  <md-button ng-click="cancel()" style="margin-right:20px;">
+                                    OK!
+                                  </md-button>
+                                </md-dialog-actions>
+                              </form>
+                        </md-dialog>
+                        </script>
+
+    <div>
+        <h3>Todos history:  <span class="label label-info">{{todoHistory.length}}</span></h3>
     </div>
     <div id="todo-list" class="row">
         <div class="col-sm-12">
