@@ -9,9 +9,9 @@ var userSchema = mongoose.Schema({
     tasks: [{
       title: String,
       description: String,
-      date: {type: Array, "default":[]}, /* na wypadek, jesli ma to byc grupa dni */
-      currentPeriod: Number,  /* aktualna ilosc wykonanego taska */
-      periodQuantity: Number, /* ilosc razy, ile ma byc wykonany task */
+      date: {type: Array, default:[]}, /* na wypadek, jesli ma to byc grupa dni */
+      currentPeriod: {type: Number, default: 0},  /* aktualna ilosc wykonanego taska */
+      periodQuantity: {type: Number, default: 1}, /* ilosc razy, ile ma byc wykonany task */
       done: Boolean
     }]
 
