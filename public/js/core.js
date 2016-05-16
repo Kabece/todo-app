@@ -1,1 +1,1 @@
-angular.module('Todo', ['todoController', 'todoService', 'ngMaterial']);
+angular.module('Todo', ['todoController', 'todoService', 'ngMaterial', 'ngAnimate']);

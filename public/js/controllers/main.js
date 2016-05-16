@@ -73,4 +73,3 @@ angular.module('todoController', [])
       return day === 0 || day === 6;
     }
   });
-

@@ -85,18 +85,28 @@
                 <div class="form-group">
                     <p ng-show="addTodo">
                         </br>
-                        <input type="text" class="form-control input-lg text-center" placeholder="Todo title " ng-model="formData.title" />
-                        </br>
-                        <input type="text" class="form-control input-lg text-center" placeholder="Todo description " ng-model="formData.description" />
-                        </br>
-                       <span style="padding: 40px;" ng-cloak="" class="datepickerdemoBasicUsage">
+                        <md-input-container class="md-block">
+                            <label>Todo title</label>
+                            <input md-maxlength="100" required="" md-no-asterisk="" name="description" ng-model="formData.title">
+                            </br>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Todo description</label>
+                            <input type="text" md-maxlength="255" required="" class="form-control input-lg text-center" ng-model="formData.description">
+                            </br>
+                        </md-input-container>
+                        <span style="padding: 40px;" ng-cloak="" class="datepickerdemoBasicUsage">
                                 <md-content>
                                   <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
                                 </md-content>
                         </span>
                         </br>
-                        <input type="number" class="form-control input-lg text-center" placeholder="Todo amount of repeats" ng-model="formData.periodQuantity" />
-                        </br>
+                        <md-input-container class="md-block">
+                            <label>Todo amount of repeats</label>
+                            <input type="number" value="1" required="" class="form-control input-lg text-center" ng-model="formData.periodQuantity">
+                            </br>
+                        </md-input-container>
+
                     </p>
                 </div>
                 <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="clearAndToggle()">Cancel</button>
