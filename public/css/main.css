@@ -20,6 +20,10 @@ body {
   position:relative;
 }
 
+.form-group button{
+    margin-left: 20px !important;
+    margin-bottom: 10px !important;
+}
 .showDate{
     margin-left: 30px;
 }

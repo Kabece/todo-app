@@ -135,11 +135,11 @@
                               <!--TODO Gandi - poprawic css :(  -->
                               <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="periodUpdate(todo._id, -1)" style="margin-right:10px !important;"
                                          ng-show="todo.periodQuantity > 1 && todo.currentPeriod > 0">
-                                                    -1
+                                                    +1
                               </md-button>
                               <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="periodUpdate(todo._id, +1)" style="margin-right:10px !important;"
                                          ng-show="todo.periodQuantity > 1  && todo.currentPeriod < todo.periodQuantity">
-                                                    +1
+                                                    -1
                               </md-button>
                           <div class="showDate pull-right" style="margin-right: 20px;" ng-show="todo.periodQuantity > 1">
                                                                           remaining: {{todo.periodQuantity-todo.currentPeriod}}
@@ -180,6 +180,11 @@
                         </md-input-container>
                     </div>
                 </md-dialog-content>
+                <span ng-cloak="" class="datepickerdemoBasicUsage">
+                    <md-content>
+                      <md-datepicker ng-model="locals.items.myDate" ng-disabled="!locals.items.enableEditing" md-placeholder="Enter date"></md-datepicker>
+                    </md-content>
+                </span>
 
                 <md-dialog-actions layout="row">
 
