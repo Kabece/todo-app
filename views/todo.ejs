@@ -161,23 +161,28 @@
             <form>
                 <md-toolbar>
                     <div class="md-toolbar-tools">
-                        <h2>{{locals.items.title}}</h2>
+                        <h2>{{locals.items.todos[locals.ind].title}}</h2>
                         <span flex></span>
-                        <md-button class="md-icon-button" ng-click="cancel()">
+                        <md-button class="md-icon-button" ng-click="cancel()">X
                         </md-button>
                     </div>
                 </md-toolbar>
 
                 <md-dialog-content>
                     <div class="md-dialog-content">
-                        <h2>{{locals.items.description}}</h2>
-
+                        <input type="checkbox" ng-click="locals.items.enableEdit()"/>
+                        <label >Enable editing</label>
+                        <h2 ng-show="!locals.items.enableEditing">{{locals.items.todos[locals.ind].description}}</h2>
+                        <md-input-container class="md-block col-sm-6" ng-show="locals.items.enableEditing">
+                            <label>Todo description</label>
+                            <input type="text" md-maxlength="255" maxlength="255" required="" class="form-control input-lg text-center" ng-model="locals.items.todos[locals.ind].description">
+                        </md-input-container>
                     </div>
                 </md-dialog-content>
 
                 <md-dialog-actions layout="row">
 
-                    <md-button ng-click="cancel()" style="margin-right:20px;">
+                    <md-button ng-click="cancel(); locals.items.enableEdit()" style="margin-right:20px;">
                         OK!
                     </md-button>
                 </md-dialog-actions>
