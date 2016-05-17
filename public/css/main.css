@@ -1,6 +1,7 @@
 html,
 body {
     overflow-y: scroll;
+    font-family: Lato, Helvetica, Arial;
 }
 #todo-list {
     margin-bottom: 30px;
@@ -10,7 +11,7 @@ body {
   background:#f2f2f2;
   border-radius:3px;
   font-size: 15px;
-  padding: 12px 40px;
+  padding: 7px 15px;
   height:46px;
   list-style:none;
   padding-left:40px;
@@ -56,9 +57,18 @@ body {
 .btn{
     background: #CF5813;
 }
+.popup md-input-container.md-block{
+    float: none;
+}
+
+.md-button{
+    min-width: auto !important;
+}
 
 
-.datepickerdemoBasicUsage {
+
+.datepickerdemoBasicUsage md-content, md-datepicker{
+    background: #f2f2f2;
 
   /** Demo styles for mdCalendar. */ }
   .datepickerdemoBasicUsage .validation-messages {
@@ -93,6 +103,14 @@ md-dialog-actions{
     border-top: 0.1em solid #999;
 }
 
+md-input-container label:not(.md-no-float):not(.md-container-ignore), md-input-container .md-placeholder{
+    padding-left: 15px !important;
+}
+
+.form-group{
+    background: #f2f2f2;
+    padding: 30px;
+}
 /*SIDEBAR*/
 #wrapper {
     padding-left: 0;
