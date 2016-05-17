@@ -161,7 +161,11 @@
             <form>
                 <md-toolbar>
                     <div class="md-toolbar-tools">
-                        <h2>{{locals.items.todos[locals.ind].title}}</h2>
+                         <h2 ng-show="!locals.items.enableEditing">{{locals.items.todos[locals.ind].title}}</h2>
+                         <md-input-container class="md-block" ng-show="locals.items.enableEditing">
+                            <label>Todo title</label>
+                            <input md-maxlength="100" required="" maxlength="100" md-no-asterisk="" name="description" ng-model="locals.items.todos[locals.ind].title">
+                         </md-input-container>
                         <span flex></span>
                         <md-button class="md-icon-button" ng-click="cancel()">X
                         </md-button>
@@ -183,7 +187,7 @@
                 <md-dialog-actions layout="row">
 
                     <md-button ng-click="cancel(); locals.items.enableEdit()" style="margin-right:20px;">
-                        OK!
+                        Zapisz!
                     </md-button>
                 </md-dialog-actions>
             </form>

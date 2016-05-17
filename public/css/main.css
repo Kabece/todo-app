@@ -89,8 +89,11 @@ body {
     Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
     */
 
+md-dialog-actions{
+    border-top: 0.1em solid #999;
+}
 
-//SIDEBAR
+/*SIDEBAR*/
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;

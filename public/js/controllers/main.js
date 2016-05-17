@@ -39,7 +39,7 @@ angular.module('todoController', [])
            Todos.create($scope.formData)
              .success(function(data) {
                $scope.formData = {};
-               $scope.isPeriodicalTask=  false;
+               $scope.isPeriodicalTask = false;
                $scope.todos = data;
              });
 
