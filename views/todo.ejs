@@ -53,7 +53,8 @@
     <div class="navbar navbar-fixed-top" style="background-color:#262626; padding-bottom:10px;">
         <div class="navbar-inner">
             <span class="pull-left listname">
-            <p>{{listName |uppercase}}</p>
+                <p>{{listName |uppercase}}</p>
+            </span>
          </div>
       </div>
       <div id="wrapper">
@@ -64,10 +65,8 @@
             <ul class="sidebar-nav">
                <li class="sidebar-brand">
                    <form class="navbar-form pull-right loggedUser" action="/logout" method="get">
-               <p>
-                  Welcome, <strong><%= user.email%></strong>
-                  <button type="submit" class="btn btn-primary">Logout</button>
-               </p>
+                     Welcome, <strong><%= user.email%></strong>
+                     <button type="submit" class="btn btn-primary pull-right btn-sm">Logout</button>
             </form>
                </li>
             </ul>
@@ -83,39 +82,36 @@
                 <button type="submit" ng-show="!addTodo" class="addTask btn btn-primary btn-lg" ng-click="toggle()"><i class="plusik glyphicon glyphicon-plus"></i>Add todo task</button>
                 <h3>Todos remaining:  <span class="label label-info">{{todos.length}}</span>
             </h3>
-            <div class="form-group">
-                <p ng-show="addTodo">
+            <div class="form-group" ng-show="addTodo">
                     </br>
-                    <md-input-container class="md-block">
-                        <label>Todo title</label>
-                        <input md-maxlength="100" required="" maxlength="100" md-no-asterisk="" name="description" ng-model="formData.title">
-                        </br>
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <label>Todo description</label>
-                        <input type="text" md-maxlength="255" maxlength="255" required="" class="form-control input-lg text-center" ng-model="formData.description">
-                        </br>
-                    </md-input-container>
-                    <span style="padding: 40px;" ng-cloak="" class="datepickerdemoBasicUsage">
-                                <md-content>
-                                  <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-                                </md-content>
+                    <div class="row" >
+                        <md-input-container class="md-block col-sm-6">
+                            <label>Todo title</label>
+                            <input md-maxlength="100" required="" maxlength="100" md-no-asterisk="" name="description" ng-model="formData.title">
+                            </br>
+                        </md-input-container>
+                        <md-input-container class="md-block col-sm-6">
+                            <label>Todo description</label>
+                            <input type="text" md-maxlength="255" maxlength="255" required="" class="form-control input-lg" ng-model="formData.description">
+                        </md-input-container>
+                    </div>
+                    <div class="row" ng-show="addTodo" style="margin-left: 0">
+                        <md-checkbox ng-model="isPeriodicalTask" aria-label="Is periodical?" class="col-sm-2">
+                          Is periodical?
+                        </md-checkbox>
+                        <md-input-container class="md-block col-sm-3">
+                            <label>Todo amount of repeats</label>
+                            <input type="number" min="1" onkeydown="return filterDigits(event)" value="1" required class="form-control input-lg text-center" ng-model="formData.periodQuantity" ng-disabled="!isPeriodicalTask">
+                        </md-input-container>
+                        <span ng-cloak="" class="datepickerdemoBasicUsage col-sm-4 col-sm-offset-3">
+                                                            <md-content>
+                                                              <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                                                            </md-content>
                         </span>
-                    </br>
-                    <md-checkbox ng-model="isPeriodicalTask" aria-label="Is periodical?">
-                      Is periodical?
-                    </md-checkbox>
-                    </br>
-                    <md-input-container class="md-block">
-                        <label>Todo amount of repeats</label>
-                        <input type="number" onkeydown="return filterDigits(event)" value="1" required class="form-control input-lg text-center" ng-model="formData.periodQuantity" ng-disabled="!isPeriodicalTask">
-                        </br>
-                    </md-input-container>
-
-                </p>
+                            </div>
+                <md-button type="submit" ng-show="addTodo" class="showDescription md-primary md-raised pull-right" ng-click="clearAndToggle()">Cancel</md-button>
+                            <md-button type="submit" ng-show="addTodo" class="showDescription md-primary md-raised" ng-click="addNewTodo()">Add task</md-button>
             </div>
-            <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="clearAndToggle()">Cancel</button>
-            <button type="submit" ng-show="addTodo" class="btn btn-primary btn-lg" ng-click="addNewTodo()">Add task</button>
             </form>
         </div>
     </div>
@@ -124,32 +120,31 @@
             <ul class="taskList-body">
               <div ng-repeat="todo in todos">
                 <li class="checkbox">
-
                     <div class="pull-left">
-                        <input type="checkbox" ng-click="archiveTask(todo._id)" />
+                        <md-checkbox ng-click="archiveTask(todo._id)" />
                         <!-- ID: {{todo._id}} </br>-->
                         <p class="pull-left">{{todo.title}} </br>
                         </p>
                         <p ng-show="showDescription">{{todos[$index].description}} </br>
                         </p>
-                        <div class="showDate pull-right" ng-show="todo.periodQuantity > 1">
-                            {{todo.currentPeriod}}/{{todo.periodQuantity}}</br>
-                        </div>
                     </div>
-
-
-                    <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="showAdvanced($event, $index)">
-                        Show description
-                    </md-button>
-                      <!--TODO Gandi - poprawic css :(  -->
-                      <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="periodUpdate(todo._id, -1)" style="margin-right:10px !important;"
-                                 ng-show="todo.periodQuantity > 1 && todo.currentPeriod > 0">
-                                            -1
-                      </md-button>
-                      <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="periodUpdate(todo._id, +1)" style="margin-right:10px !important;"
-                                 ng-show="todo.periodQuantity > 1  && todo.currentPeriod < todo.periodQuantity">
-                                            +1
-                      </md-button>
+                    <div>
+                            <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="showAdvanced($event, $index)">
+                                Show description
+                            </md-button>
+                              <!--TODO Gandi - poprawic css :(  -->
+                              <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="periodUpdate(todo._id, -1)" style="margin-right:10px !important;"
+                                         ng-show="todo.periodQuantity > 1 && todo.currentPeriod > 0">
+                                                    +1
+                              </md-button>
+                              <md-button class="showDescription md-primary md-raised" ngshow="!showDescription" ng-click="periodUpdate(todo._id, +1)" style="margin-right:10px !important;"
+                                         ng-show="todo.periodQuantity > 1  && todo.currentPeriod < todo.periodQuantity">
+                                                    -1
+                              </md-button>
+                          <div class="showDate pull-right" style="margin-right: 20px;" ng-show="todo.periodQuantity > 1">
+                                                                          remaining: {{todo.periodQuantity-todo.currentPeriod}}
+                                              </div>
+                     </div>
 
                 </li>
               </div>
@@ -162,25 +157,39 @@
         <md-dialog ng-cloak>
             <form>
                 <md-toolbar>
-                    <div class="md-toolbar-tools">
-                        <h2>{{locals.items.title}}</h2>
+                    <div class=" md-toolbar-tools">
+                         <h2 ng-show="!locals.items.enableEditing">{{locals.items.todos[locals.ind].title}}</h2>
+                         <md-input-container class="md-block" ng-show="locals.items.enableEditing">
+                            <label>Todo title</label>
+                            <input md-maxlength="100" required="" maxlength="100" md-no-asterisk="" name="description" ng-model="locals.items.todos[locals.ind].title">
+                         </md-input-container>
                         <span flex></span>
-                        <md-button class="md-icon-button" ng-click="cancel()">
+                        <md-button class="md-icon-button" ng-click="cancel(); locals.items.enableEdit()">X
                         </md-button>
                     </div>
                 </md-toolbar>
 
                 <md-dialog-content>
-                    <div class="md-dialog-content">
-                        <h2>{{locals.items.description}}</h2>
-
+                    <div class="popup md-dialog-content">
+                        <md-checkbox ng-click="locals.items.enableEdit()"/>
+                        <label >Enable editing</label>
+                        <h2 ng-show="!locals.items.enableEditing">{{locals.items.todos[locals.ind].description}}</h2>
+                        <md-input-container class="md-block col-sm-6" ng-show="locals.items.enableEditing">
+                            <label>Todo description</label>
+                            <input type="text" md-maxlength="255" maxlength="255" required="" class="form-control input-lg" ng-model="locals.items.todos[locals.ind].description">
+                        </md-input-container>
                     </div>
                 </md-dialog-content>
+                <span ng-cloak="" class="datepickerdemoBasicUsage">
+                    <md-content>
+                      <md-datepicker ng-model="locals.items.myDate" ng-disabled="!locals.items.enableEditing" md-placeholder="Enter date"></md-datepicker>
+                    </md-content>
+                </span>
 
                 <md-dialog-actions layout="row">
 
-                    <md-button ng-click="cancel()" style="margin-right:20px;">
-                        OK!
+                    <md-button ng-click="cancel(); locals.items.enableEdit()" style="margin-right:20px;">
+                        Zapisz!
                     </md-button>
                 </md-dialog-actions>
             </form>
@@ -195,7 +204,7 @@
             <ul class="taskList-body">
                 <li class="checkbox" ng-repeat="archived in todoHistory">
                     <div class="pull-left">
-                        <input type="checkbox"> {{archived.title}} </br>
+                        <md-checkbox> {{archived.title}} </br>
                         <p ng-show="showDescription">{{archived.description}}</br>
                         </p>
                         <div ng-show="archived.tasks.periodQuantity != null">

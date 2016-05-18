@@ -5,6 +5,11 @@ angular.module('todoController', [])
     $scope.listName = "Listy";
     $scope.showDescription = false;
     $scope.isPeriodicalTask = false;
+    $scope.enableEditing = false;
+
+    $scope.enableEdit = function(){
+        $scope.enableEditing = !$scope.enableEditing;
+    }
 
     $scope.showDes = function(){
         $scope.showDescription = !$scope.showDescription;
@@ -34,7 +39,7 @@ angular.module('todoController', [])
            Todos.create($scope.formData)
              .success(function(data) {
                $scope.formData = {};
-               $scope.isPeriodicalTask=  false;
+               $scope.isPeriodicalTask = false;
                $scope.todos = data;
              });
 
@@ -92,7 +97,8 @@ angular.module('todoController', [])
           clickOutsideToClose:true,
           fullscreen: useFullScreen,
           locals: {
-            items: $scope.todos[index]
+            items: $scope,
+            ind: index
           }
         })
         .then(function(answer) {
