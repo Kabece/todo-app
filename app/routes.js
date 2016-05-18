@@ -18,6 +18,16 @@ app.post('/login', passport.authenticate('local-login', {
   failureFlash : true
 }));
 
+app.post('/login/android', function(req, res, next) {
+  passport.authenticate('local-login', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) {
+      return res.status(401).json({name:'a'});
+    }
+    res.status(200).json({name:'a'});
+  }) (req, res, next);
+});
+
 app.get('/signup', function(req, res) {
   res.render('signup.ejs', { message : req.flash('signupMessage')});
 });
