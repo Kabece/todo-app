@@ -138,6 +138,62 @@ app.get('/api/users/:userMail', function(req,res) {
     })
   });
 
+  app.delete('/api/users/tasks/android/', function(req,res) {
+    console.log('Removing task: ' + req.body.title + ' for user: ' + req.body.email);
+    User.findOneAndUpdate(
+        {'email': req.body.email},
+        {$pull: {'tasks':{'title':req.body.title}}},
+           {safe: true, upsert: true, new: true},
+           function(err, model) {
+             if (err) {
+               console.log('Mongoose error description: '+ err);
+             }
+             var result = [];
+             for(var a = 0; a< model.tasks.length; a++) {
+                 if(model.tasks[a].done != true) {
+                   result.push(model.tasks[a]);
+                 }
+             }
+            res.json(result);
+           }
+    );
+  }, function(err, todo) {
+    if(err) {
+      console.log('Error descr: '+ err);
+      res.send(err);
+    }
+  });
+
+  app.post('/api/users/tasks/android', function(req, res) {
+    console.log('Attempting to create new task from android device for user: "' + req.body.userEmail + '": ');
+    console.log('Title: ' + req.body.title);
+    console.log('Description: ' + req.body.description);
+    console.log('PeriodQuantity: ' + req.body.periodQuantity);
+    User.findOneAndUpdate(
+      {'email':req.body.userEmail},
+      {$push: {'tasks':{'title':req.body.title, 'description':req.body.description,
+                        'periodQuantity':req.body.periodQuantity, 'currentPeriod':0,'done':false}}},
+      {safe: true, upsert: true, new: true},
+      function(err, model) {
+        if(err) {
+          console.log('Mongoose error description: ' + err);
+        }
+        var result = [];
+        for(var a = 0; a < model.tasks.length; a++) {
+          if(model.tasks[a].done != true) {
+            result.push(model.tasks[a]);
+          }
+        }
+        res.json(result);
+      }
+    );
+  }, function(err, todo) {
+    if(err) {
+      console.log('Error while adding task from android device: ' + err);
+      res.send(err);
+    }
+  });
+
   app.post('/api/users/tasks/', function(req,res) {
     console.log('Attempting to create new task for user "' + req.user.id +'": ');
     console.log('Title: ' + req.body.title);
