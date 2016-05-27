@@ -83,6 +83,25 @@ app.get('/api/users/:userMail', function(req,res) {
     });
   });
 
+  app.get('/api/users/tasks/active/android', function(req,res) {
+    console.log('Attempting to get active task(s) for user: "' + req.query.email + '".');
+
+    User.aggregate({$match:{'email':req.query.email}},{$unwind:"$tasks"},{$match:{'tasks.done':false}},{$project:{'tasks':1,'_id':0}}, function(err,tasks){
+      if (err) {
+        console.log('Something went wrong during getting active task(s) for user "' + req.query.email + '": ' + err);
+        res.send(err);
+      }
+
+      console.log('Succesfully got ' + tasks.length + ' active task(s) for user: "' + req.query.email + '".');
+      var result = [];
+
+      for(var a = 0; a< tasks.length; a++) {
+          result.push(tasks[a].tasks);
+      }
+      res.json(result);
+    });
+  });
+
   app.get('/api/users/tasks/active/', function(req,res) {
     console.log('Attempting to get active task(s) for user: "' + req.user.email + '".');
 
