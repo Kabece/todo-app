@@ -95,7 +95,7 @@ app.get('/api/users/:userMail', function(req,res) {
       console.log('Succesfully got ' + tasks.length + ' active task(s) for user: "' + req.query.email + '".');
       var result = [];
 
-      for(var a = 0; a< tasks.length; a++) {
+      for(var a = 0; a < tasks.length; a++) {
           result.push(tasks[a].tasks);
       }
       res.json(result);
@@ -139,7 +139,7 @@ app.get('/api/users/:userMail', function(req,res) {
   });
 
   app.post('/api/users/tasks/', function(req,res) {
-    console.log('Attemting to create new task for user "' + req.user.id +'": ');
+    console.log('Attempting to create new task for user "' + req.user.id +'": ');
     console.log('Title: ' + req.body.title);
     console.log('Description: ' + req.body.description);
     console.log('Date: ' + req.body.date);
